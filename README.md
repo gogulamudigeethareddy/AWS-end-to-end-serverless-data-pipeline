@@ -11,7 +11,13 @@ This project demonstrates an end-to-end serverless data pipeline with data inges
 
 ## Architecture
 
-![Architecture Diagram](Screenshot%202025-01-23%20at%2011.13.21%20AM-3.png)
+![Architecture Diagram](/Users/geethareddy/Desktop/Architecture Diagram.png)
+
+- Store the dataset in AWS S3.
+- Create Glue Crawler to auto discover the schema of the data stored in S3.
+- Use Amazon Athena to explore the data and identify data quality issues.
+- Use Glue Data Studio to create a job that automatically perform transformations and saves the processed data in an optimized format to AWS S3.
+- Access the transformed data stored in Amazon S3 and visualize the data in Amazon QuickSight.
 
 ## Running the Queries
 
