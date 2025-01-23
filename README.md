@@ -11,7 +11,7 @@ This project demonstrates an end-to-end serverless data pipeline with data inges
 
 ## Architecture
 
-![Architecture Diagram](Screenshot%202025-01-23%20at%2011.13.21%20AM-2.png)
+![Architecture Diagram](Screenshot%202025-01-23%20at%2011.13.21%20AM-3.png)
 
 ## Running the Queries
 
