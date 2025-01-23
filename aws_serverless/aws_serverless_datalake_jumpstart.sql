@@ -1,39 +1,58 @@
-SELECT SUBSTR(tpep_pickup_datetime, 1, 7) "Period", COUNT(*) "Total Records"
-FROM   raw_yellow_tripdata
-GROUP BY SUBSTR(tpep_pickup_datetime, 1, 7) 
-ORDER BY 1;
+-- Exploring Data in the Data Lake
 
-SELECT COUNT(*) "Count"
-FROM   raw_yellow_tripdata 
-WHERE  SUBSTR(tpep_pickup_datetime, 1, 7) NOT LIKE '2020%';
+-- Sample Data
+SELECT * 
+FROM raw_yellow_tripdata 
+LIMIT 10;
 
-SELECT COUNT(*) "Count"
-FROM   raw_yellow_tripdata
-WHERE  vendorid IS NULL
-AND    SUBSTR(tpep_pickup_datetime, 1, 7) LIKE '2020%';
+-- Query 1: Total Records by Period
+SELECT 
+    SUBSTR(tpep_pickup_datetime, 1, 7) AS "Period", 
+    COUNT(*) AS "Total Records"
+FROM 
+    raw_yellow_tripdata
+GROUP BY 
+    SUBSTR(tpep_pickup_datetime, 1, 7)
+ORDER BY 
+    "Period";
 
-SELECT COUNT(*) "Count"
-FROM raw_yellow_tripdata
-WHERE vendorid IS NOT NULL
-AND SUBSTR(tpep_pickup_datetime, 1, 7) LIKE '2020-1%';
+-- Query 2: Count of Records Not from 2020
+SELECT 
+    COUNT(*) AS "Count"
+FROM 
+    raw_yellow_tripdata 
+WHERE  
+    SUBSTR(tpep_pickup_datetime, 1, 7) NOT LIKE '2020%';
 
-SELECT td.*, pu.*, do.*
-FROM raw_yellow_tripdata td,
-     raw_taxi_zone_lookup pu,
-     raw_taxi_zone_lookup do
-WHERE td.pulocationid = pu.locationid AND   
-      td.pulocationid = do.locationid AND   
-      vendorid IS NOT NULL AND 
-      SUBSTR(tpep_pickup_datetime, 1, 7) LIKE '2020-1%'
-LIMIT 100;
+-- Query 3: Count of Records with NULL VendorID in 2020
+SELECT 
+    COUNT(*) AS "Count"
+FROM 
+    raw_yellow_tripdata
+WHERE  
+    vendorid IS NULL
+    AND SUBSTR(tpep_pickup_datetime, 1, 7) LIKE '2020%';
 
-SELECT Count(*) "Count"
-FROM raw_yellow_tripdata td,
-     raw_taxi_zone_lookup pu,
-     raw_taxi_zone_lookup do
-WHERE td.pulocationid = pu.locationid AND   
-      td.pulocationid = do.locationid AND   
-      vendorid IS NOT NULL AND 
-      SUBSTR(tpep_pickup_datetime, 1, 7) LIKE '2020-1%';
+-- Query 4: Count of Records with Non-NULL VendorID in January 2020
+SELECT 
+    COUNT(*) AS "Count"
+FROM 
+    raw_yellow_tripdata
+WHERE 
+    vendorid IS NOT NULL
+    AND SUBSTR(tpep_pickup_datetime, 1, 7) LIKE '2020-01%';
 
-
+-- Query 5: Detailed Records with Location Lookup for January 2020
+SELECT 
+    td.*, 
+    pu.*, 
+    do.*
+FROM 
+    raw_yellow_tripdata td
+JOIN 
+    raw_taxi_zone_lookup pu ON td.pulocationid = pu.locationid
+JOIN 
+    raw_taxi_zone_lookup do ON td.dolocationid = do.locationid
+WHERE 
+    vendorid IS NOT NULL
+    AND SUBSTR(tpep_pickup_datetime, 1, 7) LIKE '2020-01%';
