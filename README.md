@@ -10,6 +10,11 @@ This project demonstrates an end-to-end serverless data pipeline with data inges
 - **AWS Athena**: Querying data stored in S3 using SQL.
 - **AWS QuickSight**: Data visualization and business intelligence.
 
+## Architecture
+
+![Architecture Diagram](Screenshot%202025-01-23%20at%2011.13.21%20AM-1.png)
+
 ## Running the Queries
 
 To run these queries, you need access to the AWS serverless data lake where the `raw_yellow_tripdata` and `raw_taxi_zone_lookup` tables are stored. You can execute these queries using a SQL client that supports AWS serverless databases.
+
