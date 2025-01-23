@@ -11,7 +11,7 @@ This project demonstrates an end-to-end serverless data pipeline with data inges
 
 ## Architecture
 
-![Architecture Diagram](/Users/geethareddy/Desktop/Architecture%20Diagram.png)
+![Architecture Diagram](./aws_serverless/images/architecture_diagram.png)
 
 ## Steps
 
